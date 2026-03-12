@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ViagemModule } from './viagem/viagem.module';
+import { Viagem } from './viagem/entities/viagem.entity';
 
 @Module({
   imports: [
@@ -10,10 +12,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'root',
       database: 'db_corridacompartilhada',
-      entities: [],
+      entities: [Viagem],
       synchronize: false,
       logging: false,
-    })
+    }),
+    ViagemModule
   ],
   controllers: [],
   providers: [],
