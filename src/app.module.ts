@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Usuario } from './usuario/entities/usuario.entity';
+import { UsuarioModule } from './usuario/usuario.module';
+import { AuthModule } from './auth/auth.module';
 import { ViagemModule } from './viagem/viagem.module';
 import { Viagem } from './viagem/entities/viagem.entity';
 import { VeiculoModule } from './veiculo/veiculo.module';
@@ -14,13 +17,16 @@ import { Veiculo } from './veiculo/entities/veiculo.entity';
       username: 'root',
       password: 'root',
       database: 'db_corridacompartilhada',
-      entities: [Viagem, Veiculo],
+      entities: [Viagem, Veiculo, Usuario],
       synchronize: false,
       logging: false,
     }),
+    UsuarioModule,
+    AuthModule,
     ViagemModule,
-    VeiculoModule    
-  ],
+    VeiculoModule 
+    
+],
   controllers: [],
   providers: [],
 })
