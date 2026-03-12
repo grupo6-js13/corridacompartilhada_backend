@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { VeiculoModule } from './veiculo/veiculo.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [],
       synchronize: false,
       logging: false,
-    })
+    }),
+    VeiculoModule    
   ],
   controllers: [],
   providers: [],
