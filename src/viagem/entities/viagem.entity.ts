@@ -1,6 +1,8 @@
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsIn, IsNotEmpty, IsNumber, Length, Min } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Usuario } from "../../usuario/entities/usuario.entity";
+import { Veiculo } from "../../veiculo/entities/veiculo.entity";
 
 @Entity({ name: "tb_viagens" })
 export class Viagem {
@@ -43,4 +45,17 @@ export class Viagem {
 
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     tempoEstimado: number;
+
+    @ManyToOne(() => Usuario, (usuario) => usuario.viagem, {
+        onDelete: "CASCADE"
+    })
+    @JoinColumn({ name: "usuario_id" })
+    usuario: Usuario;
+
+    @ManyToOne(() => Veiculo, (veiculo) => veiculo.viagem, {
+        onDelete: "CASCADE"
+    })
+    @JoinColumn({ name: "veiculo_id" })
+    veiculo: Veiculo;
+
 }

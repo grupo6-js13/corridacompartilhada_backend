@@ -14,19 +14,19 @@ export class ViagemController {
         return this.viagemService.findAll();
     }
 
-    @Get('/:id')
-    @HttpCode(HttpStatus.OK)
-    findById(@Param('id', ParseIntPipe) id: number): Promise<Viagem> {
-        return this.viagemService.findById(id);
-    }
-
     @Get('/origem/:origem')
     @HttpCode(HttpStatus.OK)
     findByOrigem(@Param('origem') origem: string): Promise<Viagem[]> {
         return this.viagemService.findByOrigem(origem);
     }
 
-    @Post()
+    @Get('/:id')
+    @HttpCode(HttpStatus.OK)
+    findById(@Param('id', ParseIntPipe) id: number): Promise<Viagem> {
+        return this.viagemService.findById(id);
+    }
+
+    @Post('/cadastrar')
     @HttpCode(HttpStatus.CREATED) 
     create(@Body() viagem: Viagem): Promise<Viagem> {
         return this.viagemService.create(viagem); 

@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator"
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
-import { Transform, TransformFnParams } from "class-transformer"
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Exclude, Transform, TransformFnParams } from "class-transformer"
+import { Viagem } from "../../viagem/entities/viagem.entity"
 
 @Entity({name: "tb_usuarios"})
 export class Usuario {
@@ -23,11 +24,15 @@ export class Usuario {
     @Transform(({value}: TransformFnParams)=> value?.trim()) // remover espacos em branco - inicio e fim
     @MinLength(8)
     @IsNotEmpty()
+   // @Exclude()
     @Column({length: 255, nullable: false }) 
     senha: string
 
     @Column({length: 5000 }) 
     foto: string
 
-   
+    @OneToMany(() => Viagem, (viagem) => viagem.usuario)
+    viagem: Viagem[]
+
+    
 }

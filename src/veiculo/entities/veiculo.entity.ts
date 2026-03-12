@@ -1,6 +1,7 @@
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsNotEmpty, IsPositive, Length } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Viagem } from "../../viagem/entities/viagem.entity";
 
 @Entity({ name: "tb_veiculos" })
 export class Veiculo {
@@ -29,4 +30,7 @@ export class Veiculo {
     @IsPositive({ message: "Informe a Capacidade Máxima do Veículo" })
     @Column({ nullable: false })
     capacidadeMaxima: number;
+
+    @OneToMany(() => Viagem, (viagem) => viagem.veiculo)
+    viagem: Viagem[]
 }
