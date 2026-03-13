@@ -32,11 +32,9 @@ A API segue a arquitetura modular proposta pelo NestJS, organizando o código em
 
 1. Criar uma Viagem, consultar e atualizar suas informações.
 
-2. Cadastrar um Usuário, visualizar suas informações e gerenciar suas viagens.
+2. Cadastrar um Usuário, indicar o campus universitario, visualizar as informações do usuário e gerenciar suas viagens.
 
 3. Cadastrar um Veículo, selecionar um Veículo para uma viagem e visualizar os veículos disponíveis para condução.
-
-   
 
 ------
 
@@ -90,7 +88,7 @@ usuario : string
 senha : string
 foto: string
 viagem: Viagem[]
-+findByUsuario(usuario)
++findByCampus(campus)
 +findAll()
 +findById(id)
 +create(usuario)
@@ -103,6 +101,7 @@ nome : string
 usuario : string
 senha : string
 foto: string
+campus: string
 - token : string
 }
 
@@ -325,7 +324,7 @@ Para executar o projeto localmente:
 
 ## 13. Configuração e Execução
 
-1. Clone o repositório `[corridacompartilhada_backend](https://github.com/grupo6-js13/corridacompartilhada_backend)`
+1. Clone o repositório `https://github.com/grupo6-js13/corridacompartilhada_backend`
 
 2. Instale as dependências: `npm install`
 
