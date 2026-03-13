@@ -151,6 +151,7 @@ varchar(255) nome
 varchar(255) usuario
 varchar(255) senha
 varchar(5000) foto
+varchar(255) campus
 }
 ```
 

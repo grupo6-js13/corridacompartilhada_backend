@@ -24,6 +24,14 @@ export class UsuarioController{
         return this.usuarioService.findById(id)
     }
 
+    @Get('/campus/:campus')
+    @HttpCode(HttpStatus.OK)
+    findByCampus(@Param('campus') campus: string): Promise<Usuario[]>{
+        return this.usuarioService.findByCampus(campus)
+    }
+
+
+
     @Post('/cadastrar')
     @HttpCode(HttpStatus.CREATED)
     async create(@Body() usuario: Usuario): Promise<Usuario>{

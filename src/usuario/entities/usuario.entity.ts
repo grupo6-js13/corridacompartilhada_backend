@@ -31,6 +31,9 @@ export class Usuario {
     @Column({length: 5000 }) 
     foto: string
 
+    @Column({length: 255})
+    campus: string
+
     @OneToMany(() => Viagem, (viagem) => viagem.usuario)
     viagem: Viagem[]
 
