@@ -87,6 +87,7 @@ nome : string
 usuario : string
 senha : string
 foto: string
+campus: string
 viagem: Viagem[]
 +findByCampus(campus)
 +findAll()
