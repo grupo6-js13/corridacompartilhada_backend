@@ -1,32 +1,28 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Usuario } from './usuario/entities/usuario.entity';
+import { ConfigModule } from '@nestjs/config';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { ViagemModule } from './viagem/viagem.module';
-import { Viagem } from './viagem/entities/viagem.entity';
 import { VeiculoModule } from './veiculo/veiculo.module';
-import { Veiculo } from './veiculo/entities/veiculo.entity';
+import { ProdService } from './data/services/prod.service';
+import { DevService } from './data/services/dev.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3307,
-      username: 'root',
-      password: 'root',
-      database: 'db_corridacompartilhada',
-      entities: [Viagem, Veiculo, Usuario],
-      synchronize: true,
-      logging: false,
+    // Carrega as variáveis de ambiente
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    // Escolhe o banco de dados dinamicamente
+    TypeOrmModule.forRootAsync({
+      useClass: process.env.NODE_ENV === 'production' ? ProdService : DevService,
     }),
     UsuarioModule,
     AuthModule,
     ViagemModule,
-    VeiculoModule 
-    
-],
+    VeiculoModule
+  ],
   controllers: [],
   providers: [],
 })

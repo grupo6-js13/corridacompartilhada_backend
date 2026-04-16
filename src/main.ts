@@ -1,17 +1,17 @@
-import { NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  
-  process.env.TZ = '-03:00';
+  process.env.TZ = '-03:00'; // Fuso horário de Brasília
 
   app.useGlobalPipes(new ValidationPipe());
 
-  app.enableCors();
-  await app.listen(process.env.PORT ?? 4000);
+  app.enableCors(); // Essencial para o React conseguir consumir a API
+
+  // Usa a porta do Render ou a 4000 localmente
+  await app.listen(process.env.PORT ?? 4000); 
 }
 bootstrap();
